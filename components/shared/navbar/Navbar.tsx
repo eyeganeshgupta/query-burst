@@ -1,6 +1,9 @@
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import GlobalSearch from "../search/GlobalSearch";
+import MobileNav from "./MobileNav";
+import Theme from "./Theme";
 
 const Navbar = () => {
   return (
@@ -20,10 +23,12 @@ const Navbar = () => {
       </Link>
 
       {/* Global Search */}
+      <GlobalSearch />
 
       {/* User Profile and Theme Switcher */}
       <div className="flex-between gap-5">
         {/* Theme Switcher */}
+        <Theme />
 
         {/* User Profile */}
         <SignedIn>
@@ -41,6 +46,7 @@ const Navbar = () => {
         </SignedIn>
 
         {/* Mobile NavigationBar */}
+        <MobileNav />
       </div>
     </nav>
   );
