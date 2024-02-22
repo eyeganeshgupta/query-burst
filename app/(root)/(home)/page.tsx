@@ -1,5 +1,9 @@
-const Home = () => {
-  return <h1 className="h1-bold">Query Burst | Home</h1>;
-};
+import { UserButton } from "@clerk/nextjs";
 
-export default Home;
+export default function Home() {
+  return (
+    <div className="h-screen">
+      <UserButton />
+    </div>
+  );
+}
