@@ -1,9 +1,40 @@
 import HomeFilter from "@/components/home/HomeFilter";
 import Filter from "@/components/shared/Filter";
+import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
+
+const questions = [
+  {
+    _id: 1,
+    title: "Cascading Deletes in Oracle",
+    tags: [
+      { _id: 1, name: "SQL" },
+      { _id: 2, name: "PL/SQL" },
+    ],
+    author: "Ganesh Gupta",
+    upvotes: 10,
+    views: 51,
+    answers: 2,
+    createdAt: "2024-02-24T12:00:00.000Z",
+  },
+  {
+    _id: 2,
+    title: "How to center a div?",
+    tags: [
+      { _id: 1, name: "CSS" },
+      { _id: 2, name: "Bootstrap" },
+      { _id: 3, name: "Tailwind" },
+    ],
+    author: "Sheetal Gupta",
+    upvotes: 43,
+    views: 101,
+    answers: 17,
+    createdAt: "2024-02-24T01:00:00.000Z",
+  },
+];
 
 export default function Home() {
   return (
@@ -37,6 +68,22 @@ export default function Home() {
 
       {/* Filter buttons for medium, large, screen devices */}
       <HomeFilter />
+
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {/* Looping through question and display question card */}
+        {questions.length > 0 ? (
+          questions.map((question) => "QuestionCard")
+        ) : (
+          <NoResult
+            title="There's no question to show"
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the
+          discussion. Our query could be the next big thing others learn from. Get
+          involed! 💡"
+            link="/ask-question"
+            linkTitle="Ask a Question"
+          />
+        )}
+      </div>
     </>
   );
 }
