@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/home/HomeFilter";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
@@ -8,31 +9,39 @@ import Link from "next/link";
 
 const questions = [
   {
-    _id: 1,
+    _id: "1",
     title: "Cascading Deletes in Oracle",
     tags: [
-      { _id: 1, name: "SQL" },
-      { _id: 2, name: "PL/SQL" },
+      { _id: "1", name: "SQL" },
+      { _id: "2", name: "PL/SQL" },
     ],
-    author: "Ganesh Gupta",
-    upvotes: 10,
-    views: 51,
-    answers: 2,
-    createdAt: "2024-02-24T12:00:00.000Z",
+    author: {
+      _id: "1",
+      name: "Ganesh Gupta",
+      picture: "ganesh-gupta.jpg",
+    },
+    upvotes: 812,
+    views: 10312,
+    answers: [],
+    createdAt: new Date("2024-02-24T12:00:00.000Z"),
   },
   {
-    _id: 2,
+    _id: "2",
     title: "How to center a div?",
     tags: [
-      { _id: 1, name: "CSS" },
-      { _id: 2, name: "Bootstrap" },
-      { _id: 3, name: "Tailwind" },
+      { _id: "1", name: "CSS" },
+      { _id: "2", name: "Bootstrap" },
+      { _id: "3", name: "Tailwind" },
     ],
-    author: "Sheetal Gupta",
-    upvotes: 43,
-    views: 101,
-    answers: 17,
-    createdAt: "2024-02-24T01:00:00.000Z",
+    author: {
+      _id: "2",
+      name: "Sheetal Gupta",
+      picture: "sheetal-gupta.jpg",
+    },
+    upvotes: 889823,
+    views: 1752898,
+    answers: [],
+    createdAt: new Date("2024-02-24T01:00:00.000Z"),
   },
 ];
 
@@ -72,7 +81,19 @@ export default function Home() {
       <div className="mt-10 flex w-full flex-col gap-6">
         {/* Looping through question and display question card */}
         {questions.length > 0 ? (
-          questions.map((question) => "QuestionCard")
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResult
             title="There's no question to show"
