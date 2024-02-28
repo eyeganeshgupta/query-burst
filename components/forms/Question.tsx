@@ -21,11 +21,19 @@ import React, { useRef, useState } from "react";
 import { createQuestion } from "@/lib/actions/question.action";
 import { Editor } from "@tinymce/tinymce-react";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
+
+interface Props {
+  mongoUserId: string;
+}
 
 const type: any = "create";
 
-const Question = () => {
+const Question = ({ mongoUserId }: Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -44,8 +52,16 @@ const Question = () => {
     setIsSubmitting(true);
     try {
       // TODO: make an async call to api -> create a question
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+        path: pathname,
+      });
+
       // * navigate to home
+      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
