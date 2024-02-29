@@ -5,8 +5,10 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
+/*
 const questions = [
   {
     _id: "1",
@@ -44,8 +46,11 @@ const questions = [
     createdAt: new Date("2024-02-24T01:00:00.000Z"),
   },
 ];
+*/
 
-export default function Home() {
+export default async function Home() {
+  const result = await getQuestions({});
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -80,8 +85,8 @@ export default function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {/* Looping through question and display question card */}
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

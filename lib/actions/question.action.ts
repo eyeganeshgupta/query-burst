@@ -2,10 +2,35 @@
 
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
+import User from "@/database/user.model";
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 
-export async function createQuestion(params: any) {
-  // eslint-disable-next-line no-empty
+export async function getQuestions(params: GetQuestionsParams) {
+  try {
+    connectToDatabase();
+    const questions = await Question.find({})
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({
+        path: "author",
+        model: User,
+      })
+      .sort({
+        createdAt: -1,
+      });
+
+    return { questions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     // TODO: connect to dataBase
     connectToDatabase();
@@ -54,22 +79,11 @@ export async function createQuestion(params: any) {
         },
       },
     });
+
+    // * create an interaction record for the user's ask_question action
+
+    // * Increment author's reputation by +5 for creating a question
+
+    revalidatePath(path);
   } catch (error) {}
 }
-
-/*
-const dummyUser = {
-  clerkId: "1847",
-  name: "Ganesh",
-  username: "ganesh2003",
-  email: "ganeshgupta9762@dump.com",
-  password: "ganesh2003",
-  bio: "Full-stack Web Developer",
-  picture: "profile.jpg",
-  location: "Vasai, Palghar",
-  portfolioWebsite: "https://example.com",
-  reputation: 100,
-  saved: [],
-  joinedAt: new Date(),
-};
-*/
