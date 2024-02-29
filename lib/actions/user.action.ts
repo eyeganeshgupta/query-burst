@@ -65,6 +65,7 @@ export async function deleteUser(params: DeleteUserParams) {
 
     // ! if use exists then, we have to delete everything [questions, answers, comments, etc] that user has done.
     // * get user question ids
+    // eslint-disable-next-line no-unused-vars
     const userQuestionIds = await Question.find({
       author: userFound._id,
     }).distinct("_id");
