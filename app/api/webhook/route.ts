@@ -70,6 +70,8 @@ export async function POST(req: Request) {
       picture: image_url,
     });
 
+    console.log("user created!");
+
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
@@ -90,6 +92,8 @@ export async function POST(req: Request) {
       path: `/profile/${id}`,
     });
 
+    console.log("user updated!");
+
     return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
@@ -99,6 +103,7 @@ export async function POST(req: Request) {
     const deletedUser = await deleteUser({
       clerkId: id!,
     });
+    console.log("user deleted");
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
