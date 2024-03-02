@@ -24,12 +24,10 @@ const QuestionSchema = new Schema({
       ref: "Tag",
     },
   ],
-  views: [
-    {
-      type: Number,
-      default: 0,
-    },
-  ],
+  views: {
+    type: Number,
+    default: 0,
+  },
   upvotes: [
     {
       type: Schema.Types.ObjectId,
