@@ -42,7 +42,9 @@ const Votes = ({
             width={18}
             height={18}
             className="cursor-pointer"
-            onClick={handleVote("upvote")}
+            onClick={() => {
+              handleVote("upvote");
+            }}
           />
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
             <p className="subtle-medium text-dark400_light900">
