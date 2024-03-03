@@ -45,7 +45,7 @@ const QuestionDetailPage = async ({ params }: any) => {
           {/* question upvotes and downvotes */}
           <div className="flex justify-end">
             <Votes
-              type="question"
+              type="Question"
               itemId={JSON.stringify(result._id)}
               userId={JSON.stringify(mongoUser._id)}
               upvotes={result.upvotes.length}
@@ -67,7 +67,7 @@ const QuestionDetailPage = async ({ params }: any) => {
           imgUrl="/assets/icons/clock.svg"
           alt="clock-icon"
           value={` asked ${getTimestamp(result.createdAt)}`}
-          title=" Asked"
+          title=""
           textStyles="small-medium text-dark400_light800"
         />
 
