@@ -82,7 +82,7 @@ export async function createQuestion(params: CreateQuestionParams) {
             name: tag,
           },
           $push: {
-            question: question._id,
+            questions: question._id,
           },
         },
         {
