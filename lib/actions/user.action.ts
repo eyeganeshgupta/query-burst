@@ -77,7 +77,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
           {
             path: "author",
             model: User,
-            select: "_id clerkId name pciture",
+            select: "_id clerkId name picture",
           },
         ],
       },
@@ -99,6 +99,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
 export async function getUserQuestions(params: GetUserStatsParams) {
   try {
     connectToDatabase();
+    // eslint-disable-next-line no-unused-vars
     const { userId, page = 1, pageSize = 10 } = params;
 
     const totalQuestions = await Question.countDocuments({
@@ -116,6 +117,32 @@ export async function getUserQuestions(params: GetUserStatsParams) {
       .populate("author", "_id clerkId name picture");
 
     return { totalQuestions, questions: userQuestions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getUserAnswers(params: GetUserStatsParams) {
+  try {
+    connectToDatabase();
+    // eslint-disable-next-line no-unused-vars
+    const { userId, page = 1, pageSize = 10 } = params;
+
+    const totalAnswers = await Answer.countDocuments({
+      author: userId,
+    });
+
+    const userAnswers = await Answer.find({
+      author: userId,
+    })
+      .sort({
+        upvotes: -1,
+      })
+      .populate("question", "_id title")
+      .populate("author", "_id clerkId name picture");
+
+    return { totalAnswers, answers: userAnswers };
   } catch (error) {
     console.log(error);
     throw error;

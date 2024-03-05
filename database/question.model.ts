@@ -50,7 +50,10 @@ const QuestionSchema = new Schema({
       ref: "Answer",
     },
   ],
-  createdAt: { type: Date, default: Date.now() },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Question = models.Question || model("Question", QuestionSchema);

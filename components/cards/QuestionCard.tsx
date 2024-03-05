@@ -5,7 +5,7 @@ import RenderTag from "../shared/RenderTag";
 
 interface QuestionProps {
   _id: string;
-  clerkId?: string;
+  clerkId?: string | null | undefined;
   title: string;
   tags: {
     _id: string;
