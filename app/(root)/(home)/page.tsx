@@ -52,7 +52,10 @@ const questions = [
 export default async function Home({ searchParams }: SearchParamsProps) {
   const result = await getQuestions({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
+
+  // TODO: fetch recommended questions
 
   return (
     <>
