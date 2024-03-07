@@ -4,6 +4,7 @@ import { getTimestamp } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Filter from "./Filter";
+import Pagination from "./Pagination";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
 
@@ -86,6 +87,14 @@ const AllAnswers = async ({
             </article>
           );
         })}
+      </div>
+
+      {/* Pagination Component */}
+      <div className="mt-10 w-full">
+        <Pagination
+          pageNumber={page ? +page : 1}
+          isNext={result?.isNextAnswer}
+        />
       </div>
     </div>
   );
