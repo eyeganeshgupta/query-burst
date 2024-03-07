@@ -134,9 +134,8 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
         break;
       default:
         sortOptions = {
-          answers: -1,
+          createdAt: -1,
         };
-        break;
     }
 
     const user = await User.findOne({ clerkId }).populate({
