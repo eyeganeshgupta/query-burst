@@ -203,6 +203,7 @@ export async function getUserQuestions(params: GetUserStatsParams) {
       author: userId,
     })
       .sort({
+        createdAt: -1,
         views: -1,
         upvotes: -1,
       })

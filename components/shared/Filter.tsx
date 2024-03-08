@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/select";
 import { formUrlQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
-import { undefined } from "zod";
 
 interface Props {
   filters: {
@@ -25,6 +24,7 @@ const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  // eslint-disable-next-line no-unused-vars
   const paramFilter = searchParams.get("filter");
 
   const handleUpdateParams = (value: string) => {
@@ -39,10 +39,11 @@ const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
 
   return (
     <div className={`relative ${containerClasses}`}>
-      <Select
+      {/* <Select
         onValueChange={handleUpdateParams}
         defaultValue={paramFilter || undefined}
-      >
+      > */}
+      <Select onValueChange={handleUpdateParams}>
         <SelectTrigger
           className={`${otherClasses} body-regular light-border background-light800_dark300 text-dark500_light700 border px-5 py-2.5`}
         >
