@@ -107,9 +107,8 @@ export async function globalSearch(params: SearchParams) {
                 : item._id,
         };
       });
-
-      return JSON.stringify(results);
     }
+    return JSON.stringify(results);
   } catch (error) {
     console.log(`Error fetching global results, ${error}`);
     throw error;
