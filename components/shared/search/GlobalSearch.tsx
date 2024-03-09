@@ -21,9 +21,9 @@ const GlobalSearch = () => {
   // ! closing the GlobalResult
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
-      // @ts-ignore
       if (
         searchContainerRef.current &&
+        // @ts-ignore
         !searchContainerRef.current.contains(event.target)
       ) {
         setIsOpen(false);
