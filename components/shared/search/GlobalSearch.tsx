@@ -93,7 +93,7 @@ const GlobalSearch = () => {
             }
           }}
           placeholder="Search anything globally..."
-          className="paragraph-regular no-focus placeholder text-dark400_light700 background-light800_darkgradient border-none shadow-none outline-none"
+          className="paragraph-regular no-focus placeholder text-dark400_light700 border-none shadow-none outline-none bg-transparent"
         />
       </div>
       {isOpen && <GlobalResult />}
