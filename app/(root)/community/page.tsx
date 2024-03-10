@@ -5,7 +5,12 @@ import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Community | Query Burst",
+};
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({

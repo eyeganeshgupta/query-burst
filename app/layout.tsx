@@ -19,10 +19,12 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-spaceGrotesk",
 });
 
+// https://www.franciscomoretti.com/blog/setting-up-static-og-image-nextjs-app-router
+
 export const metadata: Metadata = {
   title: "Query Burst",
   description:
-    "A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.",
+    "An interactive hub where programming enthusiasts come together to seek assistance, exchange expertise, and engage in collaborative problem-solving. Dive into discussions spanning web development, mobile app creation, algorithms, data structures, and various other coding realms",
   icons: {
     icon: "/assets/images/site-logo.svg",
   },

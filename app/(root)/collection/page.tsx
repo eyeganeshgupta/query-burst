@@ -7,6 +7,11 @@ import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Saved Questions | Query Burst",
+};
 
 export default async function SavedQuestionCollections({
   searchParams,

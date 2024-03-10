@@ -1,6 +1,11 @@
 import Profile from "@/components/forms/Profile";
 import { getUserById } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit Profile | Query Burst",
+};
 
 const EditProfile = async () => {
   const { userId } = auth();

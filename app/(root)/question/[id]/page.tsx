@@ -8,8 +8,13 @@ import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Question Detail | Query Burst",
+};
 
 const QuestionDetailPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();

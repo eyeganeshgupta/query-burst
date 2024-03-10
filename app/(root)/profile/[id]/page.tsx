@@ -8,8 +8,13 @@ import { getUserInfo } from "@/lib/actions/user.action";
 import { getJoinedDate } from "@/lib/utils";
 import { URLProps } from "@/types";
 import { SignedIn, auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Profile | Query Burst",
+};
 
 const ProfileDetail = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();

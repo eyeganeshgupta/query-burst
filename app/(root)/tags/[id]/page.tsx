@@ -4,6 +4,11 @@ import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { getQuestionsByTagId } from "@/lib/actions/tag.action";
 import { URLProps } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Questions specific to tag | Query Burst",
+};
 
 const TagDetail = async ({ params, searchParams }: URLProps) => {
   const result = await getQuestionsByTagId({

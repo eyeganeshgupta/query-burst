@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 /*
@@ -49,6 +50,12 @@ const questions = [
   },
 ];
 */
+
+export const metadata: Metadata = {
+  title: "Home | Query Burst",
+  description:
+    "An interactive community where users can seek and provide assistance on diverse programming inquiries. Foster collaboration, exchange insights, and engage with a global network of developers. Delve into discussions spanning web development, mobile app development, algorithms, data structures, and various programming domains.",
+};
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const result = await getQuestions({
