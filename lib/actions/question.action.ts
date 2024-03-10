@@ -15,6 +15,7 @@ import {
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
+  RecommendedParams,
 } from "./shared.types";
 
 export async function getQuestionById(params: GetQuestionByIdParams) {
@@ -125,6 +126,101 @@ export async function getHotQuestions() {
     return hotQuestions;
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+}
+
+export async function getRecommendedQuestions(params: RecommendedParams) {
+  try {
+    await connectToDatabase();
+
+    const { userId, page = 1, pageSize = 10, searchQuery } = params;
+
+    // * find user
+    const user = await User.findOne({ clerkId: userId });
+
+    if (!user) {
+      throw new Error("user not found!");
+    }
+
+    const skipAmount = (page - 1) * pageSize;
+
+    // TODO: find the user interactions
+    const userInteractions = await Interaction.find({ user: user._id })
+      .populate("tags")
+      .exec();
+
+    // ! extract tags from user's interactions
+    const userTags = userInteractions.reduce((tags, interaction) => {
+      if (interaction.tags) {
+        tags = tags.concat(interaction.tags);
+      }
+      return tags;
+    }, []);
+
+    // TODO: get distinct tag IDs from user's interactions
+    const distinctUserTagIds = [
+      // @ts-ignore
+      ...new Set(
+        userTags.map((tag: any) => {
+          return tag._id;
+        })
+      ),
+    ];
+
+    const query: FilterQuery<typeof Question> = {
+      $and: [
+        {
+          tags: {
+            // ! question with user's tags
+            $in: distinctUserTagIds,
+          },
+        },
+        {
+          author: {
+            // ! exclude user's own questions
+            $ne: user._id,
+          },
+        },
+      ],
+    };
+
+    if (searchQuery) {
+      query.$or = [
+        {
+          title: {
+            $regex: searchQuery,
+            $options: "i",
+          },
+        },
+        {
+          content: {
+            $regex: searchQuery,
+            $options: "i",
+          },
+        },
+      ];
+    }
+
+    const totalQuestions = await Question.countDocuments(query);
+
+    const recommendedQuestions = await Question.find(query)
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({
+        path: "author",
+        model: User,
+      })
+      .skip(skipAmount)
+      .limit(pageSize);
+
+    const isNext = totalQuestions > skipAmount + recommendedQuestions.length;
+
+    return { questions: recommendedQuestions, isNext };
+  } catch (error) {
+    console.log("Error while getting recommended questions: ", error);
     throw error;
   }
 }
