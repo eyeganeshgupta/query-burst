@@ -20,14 +20,10 @@ export const metadata: Metadata = {
 const QuestionDetailPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
 
-  console.log("UserId or ClerkId: ");
-  console.log(clerkId);
-
   let mongoUser;
 
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
-    console.log(mongoUser);
   } else {
     redirect("/sign-in");
   }
