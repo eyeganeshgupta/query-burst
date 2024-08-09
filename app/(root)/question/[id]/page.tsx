@@ -19,10 +19,14 @@ export const metadata: Metadata = {
 const QuestionDetailPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
 
+  console.log("UserId or ClerkId: ");
+  console.log(clerkId);
+
   let mongoUser;
 
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
+    console.log(mongoUser);
   }
 
   const result = await getQuestionById({ questionId: params.id });
@@ -99,8 +103,8 @@ const QuestionDetailPage = async ({ params, searchParams }: any) => {
         {result.tags.map((tag: any) => {
           return (
             <RenderTag
-              key={tag._id}
-              _id={tag._id}
+              key={tag?._id}
+              _id={tag?._id}
               name={tag.name}
               showCount={false}
             />
@@ -109,17 +113,17 @@ const QuestionDetailPage = async ({ params, searchParams }: any) => {
       </div>
 
       <AllAnswers
-        questionId={result._id}
-        userId={mongoUser._id}
-        totalAnswers={result.answers.length}
+        questionId={result?._id}
+        userId={mongoUser?._id}
+        totalAnswers={result?.answers.length}
         page={searchParams?.page}
         filter={searchParams?.filter}
       />
 
       <Answer
-        question={result.content}
-        questionId={JSON.stringify(result._id)}
-        authorId={JSON.stringify(mongoUser._id)}
+        question={result?.content}
+        questionId={JSON.stringify(result?._id)}
+        authorId={JSON.stringify(mongoUser?._id)}
       />
     </>
   );
