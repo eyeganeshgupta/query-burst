@@ -11,7 +11,6 @@ import { auth } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Question Detail | Query Burst",
@@ -24,8 +23,6 @@ const QuestionDetailPage = async ({ params, searchParams }: any) => {
 
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
-  } else {
-    redirect("/sign-in");
   }
 
   const result = await getQuestionById({ questionId: params.id });
