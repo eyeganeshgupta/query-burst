@@ -9,7 +9,7 @@ export default authMiddleware({
     "/tags/:id",
     "/profile/:id",
     "/community",
-    "/jobs",
+    // "/question/:id",
   ],
   // Routes that can always be accessed, and have no authentication information
   ignoredRoutes: ["/api/webhook", "/api/chatgpt"],
